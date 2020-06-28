@@ -8,19 +8,16 @@ part of login_state;
 
 class _$ProfileState extends ProfileState {
   @override
-  final String vErrorMessage;
+  final User vUser;
   @override
-  final String vAuthProvide;
+  final String vError;
 
   factory _$ProfileState([void Function(ProfileStateBuilder) updates]) =>
       (new ProfileStateBuilder()..update(updates)).build();
 
-  _$ProfileState._({this.vErrorMessage, this.vAuthProvide}) : super._() {
-    if (vErrorMessage == null) {
-      throw new BuiltValueNullFieldError('ProfileState', 'vErrorMessage');
-    }
-    if (vAuthProvide == null) {
-      throw new BuiltValueNullFieldError('ProfileState', 'vAuthProvide');
+  _$ProfileState._({this.vUser, this.vError}) : super._() {
+    if (vError == null) {
+      throw new BuiltValueNullFieldError('ProfileState', 'vError');
     }
   }
 
@@ -35,20 +32,20 @@ class _$ProfileState extends ProfileState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ProfileState &&
-        vErrorMessage == other.vErrorMessage &&
-        vAuthProvide == other.vAuthProvide;
+        vUser == other.vUser &&
+        vError == other.vError;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, vErrorMessage.hashCode), vAuthProvide.hashCode));
+    return $jf($jc($jc(0, vUser.hashCode), vError.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ProfileState')
-          ..add('vErrorMessage', vErrorMessage)
-          ..add('vAuthProvide', vAuthProvide))
+          ..add('vUser', vUser)
+          ..add('vError', vError))
         .toString();
   }
 }
@@ -57,21 +54,20 @@ class ProfileStateBuilder
     implements Builder<ProfileState, ProfileStateBuilder> {
   _$ProfileState _$v;
 
-  String _vErrorMessage;
-  String get vErrorMessage => _$this._vErrorMessage;
-  set vErrorMessage(String vErrorMessage) =>
-      _$this._vErrorMessage = vErrorMessage;
+  User _vUser;
+  User get vUser => _$this._vUser;
+  set vUser(User vUser) => _$this._vUser = vUser;
 
-  String _vAuthProvide;
-  String get vAuthProvide => _$this._vAuthProvide;
-  set vAuthProvide(String vAuthProvide) => _$this._vAuthProvide = vAuthProvide;
+  String _vError;
+  String get vError => _$this._vError;
+  set vError(String vError) => _$this._vError = vError;
 
   ProfileStateBuilder();
 
   ProfileStateBuilder get _$this {
     if (_$v != null) {
-      _vErrorMessage = _$v.vErrorMessage;
-      _vAuthProvide = _$v.vAuthProvide;
+      _vUser = _$v.vUser;
+      _vError = _$v.vError;
       _$v = null;
     }
     return this;
@@ -92,9 +88,7 @@ class ProfileStateBuilder
 
   @override
   _$ProfileState build() {
-    final _$result = _$v ??
-        new _$ProfileState._(
-            vErrorMessage: vErrorMessage, vAuthProvide: vAuthProvide);
+    final _$result = _$v ?? new _$ProfileState._(vUser: vUser, vError: vError);
     replace(_$result);
     return _$result;
   }

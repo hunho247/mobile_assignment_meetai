@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
+import 'package:mobile_assignment_meetai/model/user.dart';
+import 'package:mobile_assignment_meetai/provider/user_provider.dart';
 
 import 'profile_bloc.dart';
 import 'profile_state.dart';
@@ -9,26 +11,19 @@ abstract class ProfileEvent {
   Stream<ProfileState> applyAsync({ProfileBloc bloc});
 }
 
-class LoggingInProfileEvent extends ProfileEvent {
-  final String authProvide;
+class LoadingProfileEvent extends ProfileEvent {
+  final String username;
 
-  LoggingInProfileEvent(this.authProvide);
+  LoadingProfileEvent(this.username);
 
   @override
   Stream<ProfileState> applyAsync({ProfileBloc bloc}) async* {
-    try {} catch (_, stackTrace) {
+    try {
+      User user = await UserProvider.getUser(username);
+      yield ProfileState.success(vUser: user);
+    } catch (_, stackTrace) {
       print('$_ $stackTrace');
-      yield ProfileState.failure(vErrorMessage: _?.toString());
-    }
-  }
-}
-
-class LoggingOutProfileEvent extends ProfileEvent {
-  @override
-  Stream<ProfileState> applyAsync({ProfileBloc bloc}) async* {
-    try {} catch (_, stackTrace) {
-      print('$_ $stackTrace');
-      yield ProfileState.failure(vErrorMessage: _?.toString());
+      yield ProfileState.failure(vError: _?.toString());
     }
   }
 }

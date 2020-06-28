@@ -2,16 +2,18 @@ library login_state;
 
 import 'package:meta/meta.dart';
 import 'package:built_value/built_value.dart';
+import 'package:mobile_assignment_meetai/model/user.dart';
 
 part 'profile_state.g.dart';
 
 abstract class ProfileState
     implements Built<ProfileState, ProfileStateBuilder> {
-  String get vErrorMessage;
-  String get vAuthProvide;
+  @nullable
+  User get vUser;
+  String get vError;
 
-  bool get sLoading => vErrorMessage == '';
-  bool get sLoggedInSuccessful => vAuthProvide != '' && vErrorMessage == '';
+  bool get sLoading => vError == '';
+  bool get sSuccessful => vUser != null && vError == '';
 
   ProfileState._();
 
@@ -19,23 +21,23 @@ abstract class ProfileState
 
   factory ProfileState.initial() {
     return ProfileState((b) => b
-      ..vErrorMessage = ''
-      ..vAuthProvide = '');
+      ..vUser = null
+      ..vError = '');
   }
 
   factory ProfileState.success({
-    @required String vAuthProvide,
+    @required User vUser,
   }) {
     return ProfileState((b) => b
-      ..vErrorMessage = ''
-      ..vAuthProvide = vAuthProvide);
+      ..vUser = vUser
+      ..vError = '');
   }
 
   factory ProfileState.failure({
-    @required String vErrorMessage,
+    @required String vError,
   }) {
     return ProfileState((b) => b
-      ..vErrorMessage = vErrorMessage
-      ..vAuthProvide = '');
+      ..vUser = null
+      ..vError = vError);
   }
 }

@@ -36,7 +36,7 @@ class MyAppBar extends PreferredSize {
       child: Row(
         children: <Widget>[
           SizedBox(width: 16.0),
-          CircleAvatar(radius: 14.0, backgroundImage: AssetImage(image)),
+          CircleAvatar(radius: 14.0, backgroundImage: NetworkImage(image)),
           SizedBox(width: 12.0),
           Text(
             name,

@@ -8,6 +8,13 @@ class Constants {
 
   static const Color textColor = Color(0xFF453E3E);
 
+  static const List<Color> multiColors = [
+    Colors.red,
+    Colors.amber,
+    Colors.green,
+    Colors.blue,
+  ];
+
   //*  Texts
   static const String loadingText = "Loading...";
 }
