@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 
 class HeartPulse extends StatefulWidget {
+  final bool isLiked;
+  final Function(bool) onTap;
+
+  HeartPulse({
+    this.isLiked = false,
+    this.onTap,
+  });
+
   _HeartPulseState createState() => _HeartPulseState();
 }
 
 class _HeartPulseState extends State<HeartPulse>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
-  bool isLiked = false;
+  Animation<double> _animation;
+  AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
+    _controller = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
     );
-    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn)
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          controller.reverse();
+          _controller.reverse();
         } else if (status == AnimationStatus.dismissed) {
-          controller.forward();
+          _controller.forward();
         }
       });
-    controller.forward();
+    _controller.forward();
   }
 
   @override
@@ -33,12 +40,12 @@ class _HeartPulseState extends State<HeartPulse>
     return GestureDetector(
       onTap: () {
         setState(() {
-          isLiked = !isLiked;
+          widget.onTap(!widget.isLiked);
         });
       },
       child: Center(
-        child: isLiked
-            ? _AnimatedButton(animation: animation)
+        child: widget.isLiked
+            ? _AnimatedButton(animation: _animation)
             : Image(image: AssetImage('assets/images/unlike_button.png')),
       ),
     );
@@ -46,7 +53,7 @@ class _HeartPulseState extends State<HeartPulse>
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_assignment_meetai/widget/image_slide.dart';
-import 'package:mobile_assignment_meetai/widget/pulse_app_bar.dart';
+import 'package:mobile_assignment_meetai/widget/myappbar.dart';
 
 import 'profile_bloc.dart';
 import 'profile_event.dart';
@@ -22,27 +22,60 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool _isRating = false;
+  bool _isLiked = false;
+  double _appBarHeight = 50.0;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       bloc: ProfileBloc(),
       builder: (BuildContext context, ProfileState state) {
         return Scaffold(
-          appBar: PulseAppBar(
-              name: 'Amy Nguyen',
-              image: 'assets/images/profile_pic.png',
-              height: 50),
-          body: _buildProfilePage(),
+          appBar: MyAppBar(
+            name: 'Amy Nguyen',
+            image: 'assets/images/profile_pic.png',
+            isRating: _isRating,
+            isLiked: _isLiked,
+            height: _appBarHeight,
+            onTapLikeButton: (val) {
+              if (!_isRating) {
+                setState(() {
+                  _isRating = val;
+                  _isLiked = val;
+
+                  if (val) {
+                    _appBarHeight = 100.0;
+                  } else {
+                    _appBarHeight = 50.0;
+                  }
+                });
+              }
+            },
+          ),
+          body: GestureDetector(
+            onTap: () {
+              setState(() {
+                _isRating = false;
+                _appBarHeight = 50.0;
+              });
+            },
+            child: _buildProfilePage(),
+          ),
         );
       },
     );
   }
 
   Widget _buildProfilePage() {
-    return ImageSlide(
-      imgList,
-      width: 375,
-      height: 350,
+    return Column(
+      children: <Widget>[
+        ImageSlide(
+          imgList,
+          width: 375,
+          height: 350,
+        ),
+      ],
     );
   }
 }
