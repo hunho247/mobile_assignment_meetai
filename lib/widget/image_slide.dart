@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -34,14 +35,12 @@ class _ImageSlideState extends State<ImageSlide> {
                 });
               }),
           items: widget.images
-              .map((item) => Container(
-                    child: Center(
-                        child: Image.network(
-                      item,
-                      fit: BoxFit.cover,
-                      height: 350,
-                    )),
-                  ))
+              .map(
+                (item) => CachedNetworkImage(
+                  imageUrl: item,
+                  fit: BoxFit.cover,
+                ),
+              )
               .toList(),
         ),
         Row(

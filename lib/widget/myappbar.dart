@@ -35,9 +35,9 @@ class MyAppBar extends PreferredSize {
       height: height,
       child: Row(
         children: <Widget>[
-          SizedBox(width: 16.0),
+          const SizedBox(width: 16.0),
           CircleAvatar(radius: 14.0, backgroundImage: NetworkImage(image)),
-          SizedBox(width: 12.0),
+          const SizedBox(width: 12.0),
           Text(
             name,
             style: TextStyle(
@@ -64,14 +64,14 @@ class MyAppBar extends PreferredSize {
       height: height,
       child: Column(
         children: <Widget>[
-          SizedBox(height: 17.0),
+          const SizedBox(height: 17.0),
           Row(
             children: <Widget>[
-              SizedBox(width: 16.0),
+              const SizedBox(width: 16.0),
               Image(
                 image: AssetImage('assets/images/like_button.png'),
               ),
-              SizedBox(width: 12.0),
+              const SizedBox(width: 12.0),
               Text(
                 'How much do you likes ${name}?',
                 style: TextStyle(
@@ -83,7 +83,7 @@ class MyAppBar extends PreferredSize {
               )
             ],
           ),
-          SizedBox(height: 34.0),
+          const SizedBox(height: 34.0),
           Padding(
             padding: EdgeInsets.only(left: 16),
             child: SliderBar(),

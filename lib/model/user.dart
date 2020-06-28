@@ -4,6 +4,7 @@ class User {
   final int birthdate;
   final String work;
   final String education;
+  final String bio;
   final List<String> images;
 
   User({
@@ -12,6 +13,7 @@ class User {
     this.birthdate,
     this.work,
     this.education,
+    this.bio,
     this.images,
   });
 
@@ -29,6 +31,7 @@ class User {
       birthdate: json['profile']['birthdate'],
       work: json['profile']['work'],
       education: json['profile']['education'],
+      bio: json['profile']['bio'],
       images: imgList,
     );
   }

@@ -7,6 +7,7 @@ class Constants {
   static const Color greyColor = Color(0xFFE5E5E5);
 
   static const Color textColor = Color(0xFF453E3E);
+  static const Color text2Color = Color(0xFF969696);
 
   static const List<Color> multiColors = [
     Colors.red,

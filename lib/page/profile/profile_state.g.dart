@@ -10,12 +10,14 @@ class _$ProfileState extends ProfileState {
   @override
   final User vUser;
   @override
+  final Moment vMoment;
+  @override
   final String vError;
 
   factory _$ProfileState([void Function(ProfileStateBuilder) updates]) =>
       (new ProfileStateBuilder()..update(updates)).build();
 
-  _$ProfileState._({this.vUser, this.vError}) : super._() {
+  _$ProfileState._({this.vUser, this.vMoment, this.vError}) : super._() {
     if (vError == null) {
       throw new BuiltValueNullFieldError('ProfileState', 'vError');
     }
@@ -33,18 +35,21 @@ class _$ProfileState extends ProfileState {
     if (identical(other, this)) return true;
     return other is ProfileState &&
         vUser == other.vUser &&
+        vMoment == other.vMoment &&
         vError == other.vError;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, vUser.hashCode), vError.hashCode));
+    return $jf(
+        $jc($jc($jc(0, vUser.hashCode), vMoment.hashCode), vError.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ProfileState')
           ..add('vUser', vUser)
+          ..add('vMoment', vMoment)
           ..add('vError', vError))
         .toString();
   }
@@ -58,6 +63,10 @@ class ProfileStateBuilder
   User get vUser => _$this._vUser;
   set vUser(User vUser) => _$this._vUser = vUser;
 
+  Moment _vMoment;
+  Moment get vMoment => _$this._vMoment;
+  set vMoment(Moment vMoment) => _$this._vMoment = vMoment;
+
   String _vError;
   String get vError => _$this._vError;
   set vError(String vError) => _$this._vError = vError;
@@ -67,6 +76,7 @@ class ProfileStateBuilder
   ProfileStateBuilder get _$this {
     if (_$v != null) {
       _vUser = _$v.vUser;
+      _vMoment = _$v.vMoment;
       _vError = _$v.vError;
       _$v = null;
     }
@@ -88,7 +98,8 @@ class ProfileStateBuilder
 
   @override
   _$ProfileState build() {
-    final _$result = _$v ?? new _$ProfileState._(vUser: vUser, vError: vError);
+    final _$result = _$v ??
+        new _$ProfileState._(vUser: vUser, vMoment: vMoment, vError: vError);
     replace(_$result);
     return _$result;
   }
